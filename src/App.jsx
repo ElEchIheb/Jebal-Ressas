@@ -11,6 +11,7 @@ function App() {
   const [lang, setLang] = useState("fr");
   const [isSwitching, setIsSwitching] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const appRef = useRef(null);
   const t = useMemo(() => content[lang], [lang]);
   const mediaPlan = useMemo(() => buildMediaPlan(), []);
@@ -27,6 +28,7 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = t.direction;
+    setIsNavOpen(false);
 
     const timeoutId = window.setTimeout(() => {
       setIsSwitching(false);
@@ -126,6 +128,7 @@ function App() {
   };
 
   const scrollToSection = (id) => {
+    setIsNavOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -139,13 +142,21 @@ function App() {
       <div className="ambient ambient--mist" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />
 
-      <header className={`topbar glass-panel ${isScrolled ? "topbar--scrolled" : ""}`}>
+      <header
+        className={`topbar glass-panel ${isScrolled ? "topbar--scrolled" : ""} ${
+          isNavOpen ? "topbar--nav-open" : ""
+        }`}
+      >
         <button className="brand" type="button" onClick={() => scrollToSection("top")}>
           <span className="brand__mark" aria-hidden="true" />
           <span>{t.navigation.brand}</span>
         </button>
 
-        <nav className="nav-list" aria-label={t.navigation.navLabel}>
+        <nav
+          className={`nav-list ${isNavOpen ? "is-open" : ""}`}
+          id="site-nav"
+          aria-label={t.navigation.navLabel}
+        >
           {t.navigation.sections.map((section) => (
             <button key={section.id} type="button" onClick={() => scrollToSection(section.id)}>
               {section.label}
@@ -154,6 +165,18 @@ function App() {
         </nav>
 
         <div className="topbar__actions">
+          <button
+            className={`menu-toggle ${isNavOpen ? "is-open" : ""}`}
+            type="button"
+            aria-controls="site-nav"
+            aria-expanded={isNavOpen}
+            aria-label={isNavOpen ? t.common.close : t.navigation.navLabel}
+            onClick={() => setIsNavOpen((current) => !current)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <LanguageSwitcher lang={t.languageLabel} label={t.switchLabel} onToggle={toggleLanguage} />
         </div>
       </header>
