@@ -91,16 +91,8 @@ export default defineConfig({
             return "three-vendor";
           }
 
-          if (id.includes("node_modules/leaflet")) {
-            return "leaflet-vendor";
-          }
-
           if (id.includes("node_modules/gsap")) {
             return "motion-vendor";
-          }
-
-          if (id.includes("node_modules/jspdf")) {
-            return "report-vendor";
           }
 
           return undefined;

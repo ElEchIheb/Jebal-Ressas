@@ -1,572 +1,484 @@
-export const geoFeatures = {
-  center: [36.6092, 10.3344],
-  bounds: [
-    [36.5958, 10.3225],
-    [36.6208, 10.3448]
-  ],
-  points: {
-    massif: {
-      coords: [36.6, 10.333],
-      sourceUrl: "https://en.wikipedia.org/wiki/Djebel_Ressas"
-    },
-    trailhead: {
-      coords: [36.617778, 10.335556],
-      sourceUrl: "https://climbingaway.fr/en/climbing-areas/djebel-ressas"
-    },
-    summit: {
-      coords: [36.60579, 10.33613],
-      sourceUrl: "https://www.openstreetmap.org/node/2629774802"
-    }
-  }
-};
-
 export const content = {
   fr: {
     direction: "ltr",
     languageLabel: "FR",
     switchLabel: "العربية",
     navigation: {
-      brand: "Jebel Ressas Experience",
+      brand: "Jebel Ressas",
       navLabel: "Navigation principale",
       sections: [
-        { id: "overview", label: "Apercu" },
-        { id: "experiences", label: "Moments" },
-        { id: "map", label: "Carte" },
-        { id: "three-d", label: "3D" },
-        { id: "guide", label: "Guide IA" },
+        { id: "story", label: "Arrivee" },
+        { id: "experience", label: "Moments" },
+        { id: "relief", label: "Relief" },
+        { id: "panorama", label: "Panorama" },
         { id: "gallery", label: "Galerie" },
-        { id: "report", label: "Rapport" }
-      ],
-      guideButton: "Ouvrir le guide",
-      reportButton: "Download Report"
+        { id: "emotion", label: "Emotions" },
+        { id: "visit", label: "Visite" }
+      ]
     },
     common: {
       close: "Fermer",
       backToTop: "Retour en haut",
-      openLightbox: "Ouvrir le media",
-      emptyMedia: "Ajoutez des medias dans public/assets pour enrichir automatiquement l'experience."
+      openLightbox: "Ouvrir l'image",
+      emptyMedia: "Ici, une image de Jebel Ressas prolongera le paysage."
     },
     hero: {
       kicker: "Jebel Ressas / Ben Arous / Tunisie",
-      title: "Une experience locale, cinematique et interactive construite a partir de vos medias.",
+      title: "Le silence prend de l'altitude a Jebel Ressas.",
       description:
-        "Le site exploite automatiquement les images et la video de public/assets pour composer un parcours premium autour du relief, de la marche, de la securite et de la contemplation de Jebel Ressas.",
-      primaryAction: "Voir la carte",
-      secondaryAction: "Lancer la scene 3D",
-      tertiaryAction: "Download Report",
-      noteTitle: "Media pipeline local",
+        "Quand la montagne apparait, l'air change deja. La roche claire, le vent libre et la lumiere vaste installent une marche lente, presque meditative, ou chaque pas ouvre un peu plus l'horizon.",
+      primaryAction: "Entrer dans le paysage",
+      secondaryAction: "Explorer le relief",
+      noteTitle: "Premiere respiration",
       noteText:
-        "Si une video MP4 est presente, elle devient automatiquement le fond hero. Les images JPG, PNG et WEBP sont ensuite distribuees dans les cartes, la galerie et les sections de respiration visuelle.",
+        "On vient ici pour sentir le relief se lever au-dessus de la plaine, pour laisser le bruit tomber derriere soi et pour marcher dans une lumiere qui semble plus nette qu'ailleurs.",
+      previewAlt: "Vue de Jebel Ressas",
       stats: [
-        { label: "Altitude repere", value: "795 m" },
-        { label: "Massif localise", value: "Ben Arous" },
-        { label: "Assets locaux", value: "Auto detectes" }
+        { label: "Altitude", value: "795 m" },
+        { label: "Region", value: "Ben Arous" },
+        { label: "Atmosphere", value: "Vent et silence" }
       ]
     },
-    overview: {
-      kicker: "Direction artistique",
-      title: "Le design marie cinema naturel, lisibilite premium et navigation utile.",
+    story: {
+      kicker: "Arrivee",
+      title: "On approche Jebel Ressas comme on entre dans un lieu garde par le vent.",
       text:
-        "Le systeme visuel s'appuie sur des contrastes plus nets, des transitions plus fluides, une video hero si disponible et des supports media qui restent 100% locaux.",
-      highlights: [
+        "D'abord, la montagne se dessine de loin. Puis la pierre devient plus presente, la vegetation se rarifie par endroits, et la sensation d'espace s'ouvre peu a peu autour de vous.",
+      imageAlt: "Pente de Jebel Ressas",
+      moments: [
         {
-          eyebrow: "Local first",
-          title: "Tous les visuels viennent de public/assets",
+          eyebrow: "Approche",
+          title: "La montagne se detache lentement",
           text:
-            "Aucune image externe n'est chargee. Le site detecte automatiquement vos fichiers et les attribue aux bonnes zones d'experience."
+            "La silhouette de Jebel Ressas surgit avec douceur, nette sur le ciel, comme une ligne ancienne qui rappelle la force tranquille du lieu."
         },
         {
-          eyebrow: "UX",
-          title: "Une lecture claire entre emotion, orientation et action",
+          eyebrow: "Souffle",
+          title: "Le vent ouvre l'espace",
           text:
-            "Chaque section mene soit vers la carte, soit vers la scene 3D, soit vers la galerie, soit vers le guide intelligent."
+            "Plus on avance, plus l'air devient vif. Il passe sur les herbes et sur la roche, apportant une clarte simple qui reveille les sens."
         },
         {
-          eyebrow: "Performance",
-          title: "Chargement progressif et medias optimises",
+          eyebrow: "Calme",
+          title: "Le silence devient une presence",
           text:
-            "Les images sont en lazy-loading, la video hero reste en preload metadata et les modules lourds sont differes jusqu'a ce qu'ils soient utiles."
+            "Le regard se pose plus loin, le rythme ralentit, et l'on entre dans une forme de quietude que seule la montagne sait installer."
         }
       ]
     },
     experiences: {
-      kicker: "Moments sur place",
-      title: "Des cartes media qui traduisent le panorama, le sommet et l'ambiance du massif.",
+      kicker: "A vivre",
+      title: "Quatre facons de laisser la montagne vous parler.",
       text:
-        "Les medias locaux sont reutilises intelligemment pour evoquer la lecture du relief, les points de vue et l'intensite de la marche a Jebel Ressas.",
+        "A Jebel Ressas, la journee peut etre sportive, contemplative ou simplement lumineuse. Chaque moment prend une couleur differente selon l'heure et la hauteur.",
       items: [
         {
-          eyebrow: "Panorama",
-          title: "Lire le massif depuis la plaine",
+          eyebrow: "Randonnee",
+          title: "Suivre les pentes pierreuses",
           text:
-            "Une premiere carte installe la silhouette du relief et la relation entre montagne, verdure et ciel ouvert."
+            "Marcher ici, c'est sentir la matiere sous les pieds et lire le terrain a mesure que la montagne se devoile."
         },
         {
-          eyebrow: "Sommet",
-          title: "Comprendre l'appel de la crete",
+          eyebrow: "Exploration",
+          title: "Chercher les lignes les plus douces",
           text:
-            "La seconde carte valorise les points hauts, les reperes de sommet et la sensation d'arrivee."
+            "Les flancs et les replats invitent a observer le relief, a choisir un point d'appui, a avancer avec patience."
         },
         {
-          eyebrow: "Atmosphere",
-          title: "Observer la montagne quand la lumiere change",
+          eyebrow: "Photographie",
+          title: "Attendre la lumiere sur la roche",
           text:
-            "La derniere carte laisse place au contraste plus dramatique, utile pour une lecture sensible du site."
+            "Le massif aime les ombres longues, les ciels clairs et les contrastes delicats entre la pierre et la plaine."
+        },
+        {
+          eyebrow: "Repos",
+          title: "S'asseoir face a l'horizon",
+          text:
+            "Par moments, il suffit de s'arreter, d'ecouter le vent et de laisser la vue faire le reste."
         }
       ]
     },
-    map: {
-      kicker: "Carte interactive",
-      title: "Situer Jebel Ressas, visualiser l'approche et repenser l'orientation avant la marche.",
+    relief: {
+      kicker: "Explorer le relief",
+      title: "La montagne se laisse approcher par le regard.",
       text:
-        "La carte conserve des reperes publics utiles pour preparer le parcours: massif, point d'approche et sommet. Le guide IA peut ensuite renvoyer directement vers cette section.",
-      loading: "Chargement de la carte...",
-      attribution: "Fond de carte OpenStreetMap",
-      cards: [
+        "Faites glisser doucement le massif pour suivre les cretes, reperer les passages plus doux et sentir comment la hauteur organise le paysage.",
+      loading: "Le relief apparait...",
+      hint: "Glissez doucement pour suivre les lignes du massif.",
+      leadLabel: "Sous la lumiere",
+      leadTitle: "Chaque face raconte une autre allure du lieu.",
+      leadText:
+        "Selon l'angle, Jebel Ressas parait plus abrupt, plus ouvert ou plus calme. Prenez le temps de tourner autour de ses lignes pour sentir sa presence differente d'un versant a l'autre.",
+      activeLabel: "Point de regard",
+      points: [
+        {
+          id: "viewpoint",
+          shortLabel: "Belvedere",
+          title: "Belvedere sur la plaine",
+          text:
+            "Ici, le regard s'elargit et la montagne laisse toute la plaine respirer sous vos yeux.",
+          position: [0.2, 2.45, -0.35]
+        },
+        {
+          id: "trail",
+          shortLabel: "Sente douce",
+          title: "Montee plus lisible",
+          text:
+            "Le flanc le plus doux donne envie d'une progression lente, reglee par le souffle et la lumiere.",
+          position: [-1.55, 0.8, 1.1]
+        },
+        {
+          id: "calm",
+          shortLabel: "Pause calme",
+          title: "Replat pour reprendre souffle",
+          text:
+            "Un endroit ou l'on s'arrete volontiers pour boire un peu d'eau, ecouter le vent et regarder plus loin.",
+          position: [1.6, 0.95, 0.95]
+        }
+      ]
+    },
+    panorama: {
+      kicker: "Depuis la hauteur",
+      title: "Au sommet, le regard s'etire jusqu'a l'horizon.",
+      text:
+        "La recompense de Jebel Ressas tient autant dans la vue que dans la sensation d'ouverture. Le ciel parait plus large, la plaine plus calme, et le silence plus profond.",
+      imageAlt: "Panorama depuis Jebel Ressas",
+      panelLabel: "Ligne de crete",
+      panelTitle: "La lumiere circule ici sans obstacle.",
+      panelText:
+        "Depuis les hauteurs, tout semble plus simple: les formes du terrain, la profondeur du ciel, la distance entre soi et le tumulte du quotidien.",
+      details: [
         {
           number: "01",
-          title: "Point principal",
-          text: "Le massif reste le centre narratif et visuel de toute l'experience."
+          title: "Le ciel",
+          text:
+            "Il s'ouvre en grand au-dessus de la crete, presque liquide dans sa clarte, et accompagne chaque pause du regard."
         },
         {
           number: "02",
-          title: "Approche",
-          text: "Le point de depart sert de repere simple pour parler acces, rythme et equipement."
+          title: "La plaine",
+          text:
+            "En contrebas, elle s'etale comme une respiration lente, donnant a la montagne toute sa noblesse de belvedere."
         },
         {
           number: "03",
-          title: "Sommet",
-          text: "La vue haute devient a la fois un objectif de marche et une cle de lecture photographique."
-        }
-      ],
-      points: [
-        {
-          id: "massif",
-          variant: "massif",
-          title: "Jebel Ressas",
-          text: "Repere principal du massif.",
-          sourceLabel: "Source",
-          legend: "Massif"
-        },
-        {
-          id: "trailhead",
-          variant: "trailhead",
-          title: "Point d'approche",
-          text: "Repere de parking / acces pour l'approche.",
-          sourceLabel: "Source",
-          legend: "Approche"
-        },
-        {
-          id: "summit",
-          variant: "summit",
-          title: "Sommet",
-          text: "Point haut de reference pour la vue.",
-          sourceLabel: "Source",
-          legend: "Sommet"
+          title: "Le silence",
+          text:
+            "La hauteur ne coupe pas le monde; elle l'eloigne juste assez pour le rendre plus doux."
         }
       ]
     },
-    three: {
-      kicker: "Exploration 3D",
-      title: "Une scene plus profonde, plus lumineuse et plus proche d'un relief vivant.",
+    gallery: {
+      kicker: "Galerie",
+      title: "La lumiere change, la montagne aussi.",
+      text: "Quelques instants de Jebel Ressas, entre pierre, vegetation et horizon ouvert.",
+      empty: "Des images de Jebel Ressas viendront prolonger cette respiration.",
+      openLightbox: "Ouvrir l'image",
+      closeLightbox: "Fermer l'image",
+      captions: [
+        "Premiere lumiere sur Jebel Ressas",
+        "Relief et vegetation sur le flanc de la montagne",
+        "Ligne de crete au-dessus de la plaine",
+        "Pierre claire sous un ciel ouvert"
+      ]
+    },
+    emotion: {
+      kicker: "Ce que l'on emporte",
+      title: "Certaines montagnes laissent surtout une sensation.",
       text:
-        "Le nouveau terrain Three.js ajoute texture procedurale, ombres douces, ciel graduel, brouillard leger, points interactifs et camera plus fluide pour rendre l'exploration plus credible.",
-      loading: "Chargement de la scene 3D...",
-      facts: [
+        "Jebel Ressas n'impressionne pas seulement par sa forme. Il laisse dans le corps une clarte, une respiration plus ample et une envie calme d'y revenir.",
+      imageAlt: "Atmosphere de Jebel Ressas",
+      quotes: [
         {
-          number: "A",
-          title: "Terrain stylise",
-          text: "La geometrie est deformee pour evoquer une masse rocheuse unique, avec relief et crete plus nets."
+          text: "Quand le vent passe sur la pierre, on a l'impression que la montagne respire.",
+          context: "Au bord du sentier"
         },
         {
-          number: "B",
-          title: "Lumiere et matiere",
-          text: "Le materiau utilise des textures generees localement dans le navigateur pour suggerer la roche et le sol."
+          text: "Depuis la crete, la lumiere semble aller moins vite.",
+          context: "A l'heure doree"
         },
         {
-          number: "C",
-          title: "Interaction fluide",
-          text: "Rotation, zoom, hover sur les points d'interet et animation lente renforcent la qualite percue."
+          text: "Ici, le silence ne vide pas le paysage; il le rend plus present.",
+          context: "Face a la plaine"
         }
-      ],
-      labels: [
-        {
-          title: "Sommet",
-          text: "Point haut a observer et a photographier.",
-          position: [0.15, 2.65, -0.2]
-        },
-        {
-          title: "Face rocheuse",
-          text: "Une lecture plus minerale et plus abrupte.",
-          position: [1.9, 1.2, 0.75]
-        },
-        {
-          title: "Approche douce",
-          text: "Zone plus lisible pour imaginer l'entree du parcours.",
-          position: [-1.45, 0.5, 1.1]
-        }
-      ],
-      hoverTitle: "Point survole"
+      ]
+    },
+    cta: {
+      kicker: "L'appel du lieu",
+      title: "Il suffit d'une marche pour que Jebel Ressas reste en memoire.",
+      text:
+        "Venez tot, laissez la lumiere monter sur la roche, prenez le temps de regarder loin, puis redescendez avec cette sensation rare d'avoir retrouve de l'espace.",
+      primaryAction: "Revenir au debut",
+      secondaryAction: "Feuilleter la galerie",
+      imageAlt: "Crete de Jebel Ressas"
     },
     guide: {
-      kicker: "Guide intelligent",
-      title: "Un assistant plus malin, capable de comprendre l'intention derriere la question.",
-      text:
-        "Le guide ne repond plus avec un bloc fixe. Il analyse les mots importants, combine plusieurs intentions si necessaire, propose une reponse evolutive et suggere la prochaine action la plus utile.",
-      features: [
-        {
-          eyebrow: "Intentions",
-          title: "Comprendre le besoin",
-          text: "Timing, equipement, securite, vues, acces, photo et exploration 3D sont reconnus par une logique de score."
-        },
-        {
-          eyebrow: "Actions",
-          title: "Passer de la reponse a l'action",
-          text: "Chaque reponse peut proposer d'ouvrir la carte, la galerie, la scene 3D ou le rapport."
-        },
-        {
-          eyebrow: "Conversation",
-          title: "Une interface plus vivante",
-          text: "Boutons de questions, typing animation, panneau ouvrable et historique rendent l'echange beaucoup plus naturel."
-        }
-      ],
-      openButton: "Ouvrir le guide IA"
-    },
-    assistant: {
-      launcher: "Guide IA",
-      openLabel: "Ouvrir le guide IA",
-      closeLabel: "Fermer le guide IA",
-      title: "Guide intelligent Jebel Ressas",
+      launcher: "Guide",
+      openLabel: "Ouvrir le guide",
+      closeLabel: "Fermer le guide",
+      title: "Compagnon de visite",
       intro:
-        "Posez une question sur la visite, la securite, la meilleure lumiere, l'approche ou la scene 3D. Je peux aussi vous guider vers la carte, la galerie et le rapport.",
-      placeholder: "Ex. meilleur moment pour y aller, niveau de difficulte, ou voir le sommet",
-      submit: "Envoyer",
-      thinking: "Le guide prepare une reponse...",
+        "Je peux vous aider a choisir le meilleur moment, le rythme de marche, ce qu'il vaut mieux emporter et les endroits ou la vue s'ouvre le plus.",
+      quickLabel: "Questions utiles",
       quickQuestions: [
-        "Quel est le meilleur moment pour marcher ?",
-        "Quels conseils de securite suivre ?",
-        "Ou commencer l'approche ?",
-        "Quelles vues sont les plus photogeniques ?"
+        "Quel moment est le plus beau pour venir ?",
+        "Que faut-il emporter pour marcher sereinement ?",
+        "Ou la vue est-elle la plus ouverte ?",
+        "Comment garder la marche douce et agreable ?"
       ],
+      placeholder: "Ecrivez votre question...",
+      submit: "Envoyer",
+      thinking: "Le guide vous repond...",
       speaker: {
-        assistant: "Guide Jebel Ressas",
+        guide: "Guide",
         user: "Vous"
       },
       actions: {
-        map: "Voir la carte",
-        gallery: "Voir la galerie",
-        three: "Explorer la 3D",
-        report: "Download Report"
+        relief: "Explorer le relief",
+        panorama: "Voir l'horizon",
+        gallery: "Voir les images",
+        experience: "Voir les moments a vivre",
+        visit: "Preparer la venue"
       }
-    },
-    gallery: {
-      kicker: "Galerie locale",
-      title: "Filtrer images et video, puis ouvrir chaque media dans une lightbox plus douce.",
-      text:
-        "La galerie recense automatiquement tous les fichiers trouves dans public/assets. Les videos restent en preview silencieuse et les images se chargent seulement au moment opportun.",
-      filters: {
-        all: "Tout",
-        images: "Images",
-        videos: "Videos"
-      },
-      empty: "Aucun media local detecte dans public/assets.",
-      closeLightbox: "Fermer la lightbox",
-      mediaLabel: {
-        image: "Image locale",
-        video: "Video locale"
-      }
-    },
-    report: {
-      kicker: "Rapport PDF",
-      title: "Generer un dossier complet du projet directement depuis le frontend.",
-      text:
-        "Le bouton telecharge un PDF avec l'overview du projet, les technologies, les fonctionnalites, l'approche design, la liste des medias locaux et la procedure de lancement.",
-      button: "Download Report",
-      generating: "Generation du rapport...",
-      bullets: [
-        "Vue d'ensemble du projet Jebel Ressas Experience",
-        "Piles techniques et modules interactifs",
-        "Liste des medias locaux detectes automatiquement",
-        "Conseils de lancement et prochaines evolutions"
-      ]
     },
     footer: {
-      note:
-        "Experience frontend locale pour Jebel Ressas avec video hero, galerie automatique, guide intelligent, scene 3D amelioree et rapport PDF telechargeable."
+      note: "Jebel Ressas, entre pierre claire, vent libre et horizon."
     }
   },
   ar: {
     direction: "rtl",
     languageLabel: "AR",
-    switchLabel: "Français",
+    switchLabel: "Francais",
     navigation: {
-      brand: "تجربة جبل الرصاص",
+      brand: "جبل الرصاص",
       navLabel: "التنقل الرئيسي",
       sections: [
-        { id: "overview", label: "نظرة" },
-        { id: "experiences", label: "اللحظات" },
-        { id: "map", label: "الخريطة" },
-        { id: "three-d", label: "ثلاثي الأبعاد" },
-        { id: "guide", label: "الدليل الذكي" },
+        { id: "story", label: "الوصول" },
+        { id: "experience", label: "اللحظات" },
+        { id: "relief", label: "الجبل" },
+        { id: "panorama", label: "البانوراما" },
         { id: "gallery", label: "المعرض" },
-        { id: "report", label: "التقرير" }
-      ],
-      guideButton: "افتح الدليل",
-      reportButton: "حمّل التقرير"
+        { id: "emotion", label: "الأثر" },
+        { id: "visit", label: "الزيارة" }
+      ]
     },
     common: {
       close: "إغلاق",
       backToTop: "العودة إلى الأعلى",
-      openLightbox: "افتح الوسيط",
-      emptyMedia: "أضف ملفات داخل public/assets ليتم توزيعها تلقائياً داخل التجربة."
+      openLightbox: "افتح الصورة",
+      emptyMedia: "هنا تمتد صورة من جبل الرصاص لتكمل المشهد."
     },
     hero: {
       kicker: "جبل الرصاص / بن عروس / تونس",
-      title: "تجربة محلية غامرة ومصقولة تعتمد على الوسائط الموجودة لديك.",
+      title: "هنا يرتفع الصمت مع الجبل.",
       description:
-        "الموقع يكتشف الصور والفيديو داخل public/assets ويعيد توظيفها تلقائياً في الواجهة، والبطاقات، والمعرض، والمشاهد البصرية الخاصة بجبل الرصاص.",
-      primaryAction: "اعرض الخريطة",
-      secondaryAction: "ابدأ المشهد ثلاثي الأبعاد",
-      tertiaryAction: "حمّل التقرير",
-      noteTitle: "خط وسائط محلي",
+        "حين يلوح جبل الرصاص من بعيد، يتبدل الهواء قبل أن تبدأ الخطوات. صخر فاتح، ريح حرة، وضوء واسع يجعل المشي أبطأ وأعمق، كأن الزمن نفسه يلين فوق السفح.",
+      primaryAction: "ادخل إلى المشهد",
+      secondaryAction: "استكشف الجبل",
+      noteTitle: "النفس الأول",
       noteText:
-        "إذا وُجد فيديو MP4 فسيصبح خلفية البطل مباشرة. بعد ذلك يتم توزيع الصور المحلية على بطاقات التجربة والمعرض ومساحات السرد البصري.",
+        "يأتي الناس إلى هذا الجبل ليشعروا بعلو الصخر فوق السهل، وليتركوا الضجيج خلفهم، وليمشوا داخل ضوء واضح يمنح المكان هيبته الهادئة.",
+      previewAlt: "مشهد من جبل الرصاص",
       stats: [
-        { label: "ارتفاع مرجعي", value: "795 م" },
+        { label: "الارتفاع", value: "795م" },
         { label: "الموقع", value: "بن عروس" },
-        { label: "الوسائط المحلية", value: "اكتشاف تلقائي" }
+        { label: "الإحساس", value: "هواء وصمت" }
       ]
     },
-    overview: {
-      kicker: "الهوية البصرية",
-      title: "التصميم يمزج بين الطبيعة السينمائية والوضوح العملي والحركة الهادئة.",
+    story: {
+      kicker: "الوصول",
+      title: "الاقتراب من جبل الرصاص يشبه الدخول إلى مكان تحفظه الريح.",
       text:
-        "الواجهة الجديدة تعتمد على وسائط محلية فقط، وتقدّم تبايناً أفضل، وانتقالات أنعم، وخلفية فيديو في القسم الأول عندما تكون متاحة.",
-      highlights: [
+        "في البداية يظهر الجبل كخط واضح في الأفق، ثم تقترب الحجارة، وتخف كثافة النبات في بعض المواضع، ويتسع الفراغ من حولك شيئا فشيئا.",
+      imageAlt: "سفح جبل الرصاص",
+      moments: [
         {
-          eyebrow: "محلي بالكامل",
-          title: "كل الصور والفيديو من public/assets",
+          eyebrow: "الاقتراب",
+          title: "الجبل يخرج من الأفق بهدوء",
           text:
-            "لا يتم تحميل أي صورة خارجية. الموقع يكتشف الملفات تلقائياً ويضعها في المواضع المناسبة."
+            "تظهر كتلة جبل الرصاص بثبات ووضوح، كأنها علامة قديمة تعرف الطريق وتمنح المكان ثقله الهادئ."
         },
         {
-          eyebrow: "تجربة",
-          title: "مسار واضح بين الشعور والمعلومة والفعل",
+          eyebrow: "الهواء",
+          title: "الريح تفتح المسافة",
           text:
-            "كل قسم يقود إلى الخريطة أو المشهد ثلاثي الأبعاد أو المعرض أو الدليل الذكي."
+            "كلما تقدمت صار الهواء أخف وأصفى. يمر فوق العشب والصخر ويوقظ الحواس دون ضجيج."
         },
         {
-          eyebrow: "أداء",
-          title: "تحميل تدريجي ووسائط أخف",
+          eyebrow: "السكينة",
+          title: "الصمت يصبح حضورا",
           text:
-            "الصور تُحمّل عند الحاجة، والفيديو في البطل يستخدم metadata، والوحدات الثقيلة تؤجَّل حتى تصبح ضرورية."
+            "يتباطأ الإيقاع، يبتعد ما حولك قليلا، ويبدأ الجبل في منحك ذلك الصفاء الذي لا يوجد إلا في الأماكن المرتفعة."
         }
       ]
     },
     experiences: {
-      kicker: "لحظات من المكان",
-      title: "بطاقات بصرية تترجم المشهد، والقمة، وتبدل الضوء فوق الجبل.",
+      kicker: "ما يمكن عيشه",
+      title: "أربع طرق كي تترك الجبل يتحدث إليك.",
       text:
-        "يُعاد استخدام الوسائط المحلية بذكاء لتمثيل شكل الجبل، وحضور القمة، وحساسية المشهد من الصباح حتى الضوء المتأخر.",
+        "في جبل الرصاص يمكن لليوم أن يكون مشيا وتأملا وتصويرا وراحة. كل لحظة تأخذ لونها الخاص بحسب الضوء والارتفاع.",
       items: [
         {
-          eyebrow: "بانوراما",
-          title: "قراءة الجبل من السهل",
-          text:
-            "البطاقة الأولى تبرز علاقة الكتلة الجبلية بالأشجار والأفق المفتوح."
+          eyebrow: "المشي",
+          title: "اتباع السفوح الحجرية",
+          text: "المشي هنا يعني أن تشعر بالأرض تحت قدميك، وأن تقرأ التضاريس خطوة بعد خطوة."
         },
         {
-          eyebrow: "قمة",
-          title: "استيعاب جاذبية الخط العالي",
-          text:
-            "البطاقة الثانية تركز على لحظة الوصول وعلى العلامات المرتبطة بالقمة."
+          eyebrow: "الاستكشاف",
+          title: "البحث عن المسارات الألين",
+          text: "تدعوك المنحدرات والفسحات الصغيرة إلى التأمل في شكل الجبل واختيار طريقك بهدوء."
         },
         {
-          eyebrow: "أجواء",
-          title: "مراقبة الجبل حين يتغير الضوء",
-          text:
-            "البطاقة الثالثة تمنح مساحة للمشهد الأكثر درامية ولتجربة الضوء فوق الصخور."
+          eyebrow: "التصوير",
+          title: "انتظار الضوء على الصخر",
+          text: "هذا المكان يحب الظلال الطويلة والسماء الصافية والتباين الرقيق بين الحجر والسهل."
+        },
+        {
+          eyebrow: "الراحة",
+          title: "الجلوس أمام الأفق",
+          text: "أحيانا يكفي أن تتوقف، أن تستمع إلى الريح، وأن تترك للمشهد مهمته كاملة."
         }
       ]
     },
-    map: {
-      kicker: "الخريطة التفاعلية",
-      title: "حدّد الجبل، ونقطة الاقتراب، والقمة قبل بدء الرحلة.",
+    relief: {
+      kicker: "استكشف الجبل",
+      title: "اقترب من الجبل بعينيك قبل خطواتك.",
       text:
-        "الخريطة تحتفظ بالإشارات العامة المفيدة للتهيؤ قبل المشي: الكتلة الجبلية، ونقطة الاقتراب، والقمة. ويمكن للدليل الذكي أن يوجّه إليها مباشرة.",
-      loading: "جارٍ تحميل الخريطة...",
-      attribution: "OpenStreetMap",
-      cards: [
+        "حرّك المشهد بهدوء لتتبع خطوط القمم، وتلاحظ الممرات الألين، وتشعر كيف يرتب الارتفاع هذا الفضاء الواسع.",
+      loading: "يتشكل الجبل...",
+      hint: "حرّك المشهد بهدوء لتتبع خطوط الجبل.",
+      leadLabel: "تحت الضوء",
+      leadTitle: "كل جهة تمنح الجبل هيئة مختلفة.",
+      leadText:
+        "من زاوية يبدو أكثر حدّة، ومن أخرى يبدو أهدأ وأوسع. خذ وقتك في الدوران حول ملامحه لتشعر بتبدل حضوره من سفح إلى آخر.",
+      activeLabel: "موضع نظر",
+      points: [
+        {
+          id: "viewpoint",
+          shortLabel: "إطلالة",
+          title: "إطلالة على السهل",
+          text: "هنا يتسع النظر، ويترك الجبل للسهل أن يتنفس كاملا تحت عينيك.",
+          position: [0.2, 2.45, -0.35]
+        },
+        {
+          id: "trail",
+          shortLabel: "ممر هادئ",
+          title: "صعود أكثر ليونة",
+          text: "هذا الجانب يدعو إلى مشي متدرج، تنظمه الأنفاس وترافقه خفة الضوء.",
+          position: [-1.55, 0.8, 1.1]
+        },
+        {
+          id: "calm",
+          shortLabel: "استراحة",
+          title: "فسحة لالتقاط النفس",
+          text: "مكان مناسب للتوقف، لشربة ماء قصيرة، ولإصغاء هادئ إلى الريح قبل مواصلة الطريق.",
+          position: [1.6, 0.95, 0.95]
+        }
+      ]
+    },
+    panorama: {
+      kicker: "من العلو",
+      title: "عند القمة يتمدد النظر حتى آخر الأفق.",
+      text:
+        "هبة جبل الرصاص ليست في المشهد وحده، بل في الإحساس الواسع الذي يرافقه. السماء أكبر، والسهل أهدأ، والصمت أعمق.",
+      imageAlt: "بانوراما من جبل الرصاص",
+      panelLabel: "خط القمة",
+      panelTitle: "الضوء يمر هنا بلا عائق.",
+      panelText:
+        "من الأعلى تبدو الأشياء أبسط: شكل الأرض، عمق السماء، والمسافة التي تفصل القلب عن صخب اليوم.",
+      details: [
         {
           number: "01",
-          title: "النقطة الرئيسية",
-          text: "يبقى الجبل هو المركز البصري والتحريري للتجربة كلها."
+          title: "السماء",
+          text: "تنفتح فوق القمة باتساع نادر، صافية وخفيفة، وتمنح كل وقفة معنى أطول."
         },
         {
           number: "02",
-          title: "الاقتراب",
-          text: "النقطة الثانية تساعد على الحديث عن الوصول، والوتيرة، وما يلزم من تجهيز."
+          title: "السهل",
+          text: "يمتد في الأسفل كتنفس بطيء، فيزيد الجبل حضورا ويمنح الوقوف فوقه رهبة جميلة."
         },
         {
           number: "03",
-          title: "القمة",
-          text: "القمة هي هدف بصري وهدف للمشي في الوقت نفسه."
-        }
-      ],
-      points: [
-        {
-          id: "massif",
-          variant: "massif",
-          title: "جبل الرصاص",
-          text: "المرجع الأساسي للمكان.",
-          sourceLabel: "المصدر",
-          legend: "الجبل"
-        },
-        {
-          id: "trailhead",
-          variant: "trailhead",
-          title: "نقطة الاقتراب",
-          text: "مرجع مبسط للوصول إلى بداية المسار.",
-          sourceLabel: "المصدر",
-          legend: "الاقتراب"
-        },
-        {
-          id: "summit",
-          variant: "summit",
-          title: "القمة",
-          text: "النقطة العليا المرجعية للمشهد.",
-          sourceLabel: "المصدر",
-          legend: "القمة"
+          title: "الصمت",
+          text: "العلو لا يقطع العالم، لكنه يبعده بالقدر الذي يجعل كل شيء أكثر لطفا."
         }
       ]
     },
-    three: {
-      kicker: "الاستكشاف ثلاثي الأبعاد",
-      title: "مشهد أجمل وأكثر عمقاً مع ضوء أفضل وملمس أقرب للصخر الحقيقي.",
+    gallery: {
+      kicker: "المعرض",
+      title: "كل تبدل في الضوء يكشف وجها آخر للجبل.",
+      text: "لحظات من جبل الرصاص بين الصخر والنبات واتساع الأفق.",
+      empty: "ستأتي صور جبل الرصاص لتكمل هذا الهدوء.",
+      openLightbox: "افتح الصورة",
+      closeLightbox: "أغلق الصورة",
+      captions: [
+        "الضوء الأول على جبل الرصاص",
+        "التقاء الصخر والنبات على السفح",
+        "خط القمة فوق السهل",
+        "صخر فاتح تحت سماء مفتوحة"
+      ]
+    },
+    emotion: {
+      kicker: "ما يبقى في الداخل",
+      title: "بعض الجبال تترك في الذاكرة إحساسا قبل أن تترك صورة.",
       text:
-        "المشهد الجديد يضيف خامات إجرائية، وظلالاً ناعمة، وتدرجاً في السماء، وضباباً خفيفاً، ونقاطاً تفاعلية، وحركة بطيئة تجعل قراءة الجبل أكثر جاذبية.",
-      loading: "جارٍ تحميل المشهد ثلاثي الأبعاد...",
-      facts: [
+        "جبل الرصاص لا يكتفي بشكل جميل في الأفق. إنه يترك في الجسد صفاء، وفي النفس اتساعا، وفي الذاكرة رغبة هادئة في العودة.",
+      imageAlt: "أجواء جبل الرصاص",
+      quotes: [
         {
-          number: "A",
-          title: "تضاريس مصقولة",
-          text: "الهندسة مشوهة بعناية لتوحي بجبل منفرد بكتلة صخرية أوضح."
+          text: "حين تمر الريح فوق الصخر يبدو كأن الجبل يتنفس.",
+          context: "على حافة المسار"
         },
         {
-          number: "B",
-          title: "ضوء ومادة",
-          text: "الخامة تُولّد داخل المتصفح لتعطي إحساساً بالصخر والتربة من دون أي ملفات خارجية."
+          text: "من القمة يصبح الضوء أبطأ وألين.",
+          context: "وقت الغروب"
         },
         {
-          number: "C",
-          title: "تفاعل سلس",
-          text: "يمكن الدوران والتكبير والتحويم فوق النقاط المهمة مع حركة هادئة مستمرة."
+          text: "هنا لا يفرغ الصمت المكان، بل يجعله أوضح.",
+          context: "أمام السهل"
         }
-      ],
-      labels: [
-        {
-          title: "القمة",
-          text: "نقطة عالية مناسبة للقراءة والتصوير.",
-          position: [0.15, 2.65, -0.2]
-        },
-        {
-          title: "الواجهة الصخرية",
-          text: "قراءة أكثر حدّة ووضوحاً للصخر.",
-          position: [1.9, 1.2, 0.75]
-        },
-        {
-          title: "الاقتراب الهادئ",
-          text: "منطقة أسهل لتخيّل بداية الصعود.",
-          position: [-1.45, 0.5, 1.1]
-        }
-      ],
-      hoverTitle: "النقطة الحالية"
+      ]
+    },
+    cta: {
+      kicker: "نداء المكان",
+      title: "تكفيك رحلة واحدة ليبقى جبل الرصاص معك.",
+      text:
+        "تعال في ساعة هادئة، دع الضوء يصعد على الصخر، وانظر بعيدا بما يكفي لتشعر أن المسافة اتسعت داخلك أيضا.",
+      primaryAction: "العودة إلى البداية",
+      secondaryAction: "تصفح المعرض",
+      imageAlt: "قمة جبل الرصاص"
     },
     guide: {
-      kicker: "الدليل الذكي",
-      title: "مساعد يفهم نية السؤال ويقترح الخطوة التالية مباشرة.",
-      text:
-        "الرد لم يعد ثابتاً. الدليل يحلل الكلمات المهمة، ويجمع أكثر من نية عند الحاجة، ويقترح فتح الخريطة أو المعرض أو المشهد ثلاثي الأبعاد أو التقرير.",
-      features: [
-        {
-          eyebrow: "النية",
-          title: "يفهم نوع السؤال",
-          text: "يستوعب الوقت الأنسب، السلامة، التجهيز، الوصول، الصور، والمشهد ثلاثي الأبعاد."
-        },
-        {
-          eyebrow: "الفعل",
-          title: "ينقلك إلى الخطوة المناسبة",
-          text: "كل إجابة يمكن أن تتبعها أزرار عملية للانتقال مباشرة إلى الجزء المناسب."
-        },
-        {
-          eyebrow: "الحوار",
-          title: "واجهة محادثة أكثر حيوية",
-          text: "أسئلة مقترحة، كتابة تدريجية، وفتح وإغلاق سلس يجعل الدليل أقرب إلى مساعد صغير فعلي."
-        }
-      ],
-      openButton: "افتح الدليل الذكي"
-    },
-    assistant: {
-      launcher: "الدليل الذكي",
+      launcher: "دليلك",
       openLabel: "افتح الدليل",
       closeLabel: "أغلق الدليل",
-      title: "دليل جبل الرصاص",
+      title: "دليلك في الجبل",
       intro:
-        "اسأل عن وقت الزيارة، السلامة، التجهيز، الإطلالات، بداية الاقتراب أو المشهد ثلاثي الأبعاد. أستطيع أيضاً أن أوجّهك إلى المعرض أو التقرير.",
-      placeholder: "مثال: ما أفضل وقت؟ ما درجة الصعوبة؟ أين تبدأ الإطلالة؟",
-      submit: "إرسال",
-      thinking: "الدليل يحضّر الإجابة...",
+        "أستطيع أن أساعدك في اختيار الوقت الأجمل، وإيقاع المشي الأنسب، وما يستحسن أن تحمله معك، وأين تتسع الإطلالة أكثر.",
+      quickLabel: "أسئلة مفيدة",
       quickQuestions: [
-        "ما أفضل وقت للمشي؟",
-        "ما أهم نصائح السلامة؟",
-        "من أين تبدأ المقاربة؟",
-        "أين أجد أفضل الصور؟"
+        "ما أجمل وقت للزيارة؟",
+        "ماذا أحمل معي للمشي؟",
+        "أين تكون الإطلالة الأوسع؟",
+        "كيف أجعل الرحلة هادئة ومريحة؟"
       ],
+      placeholder: "اكتب سؤالك...",
+      submit: "إرسال",
+      thinking: "الدليل يجيبك...",
       speaker: {
-        assistant: "دليل جبل الرصاص",
+        guide: "الدليل",
         user: "أنت"
       },
       actions: {
-        map: "افتح الخريطة",
-        gallery: "اعرض المعرض",
-        three: "ابدأ 3D",
-        report: "حمّل التقرير"
+        relief: "استكشف الجبل",
+        panorama: "شاهد الأفق",
+        gallery: "شاهد الصور",
+        experience: "شاهد لحظات الزيارة",
+        visit: "استعد للقدوم"
       }
-    },
-    gallery: {
-      kicker: "المعرض المحلي",
-      title: "صفِّ الصور والفيديو ثم افتح كل وسيط داخل lightbox أنعم وأكثر أناقة.",
-      text:
-        "المعرض يقرأ كل الملفات الموجودة في public/assets تلقائياً. الفيديو يُعرض بمعاينة صامتة، والصور تُحمّل فقط عندما تصبح قريبة من المشاهدة.",
-      filters: {
-        all: "الكل",
-        images: "الصور",
-        videos: "الفيديو"
-      },
-      empty: "لا توجد وسائط محلية داخل public/assets.",
-      closeLightbox: "أغلق lightbox",
-      mediaLabel: {
-        image: "صورة محلية",
-        video: "فيديو محلي"
-      }
-    },
-    report: {
-      kicker: "تقرير PDF",
-      title: "ولّد ملفاً كاملاً عن المشروع مباشرة من الواجهة.",
-      text:
-        "الزر يحمّل تقرير PDF يضم نظرة عامة، والتقنيات المستعملة، والوظائف، ونهج التصميم، وقائمة الوسائط المحلية، وطريقة تشغيل المشروع، والتحسينات المستقبلية.",
-      button: "حمّل التقرير",
-      generating: "جارٍ توليد التقرير...",
-      bullets: [
-        "ملخص مشروع Jebel Ressas Experience",
-        "التقنيات والوحدات التفاعلية",
-        "قائمة الوسائط المحلية المكتشفة تلقائياً",
-        "طريقة التشغيل والنسخ القادمة"
-      ]
     },
     footer: {
-      note:
-        "واجهة محلية بالكامل لجبل الرصاص مع فيديو بطل، معرض تلقائي، دليل ذكي، مشهد ثلاثي الأبعاد مطوّر، وتقرير PDF قابل للتنزيل."
+      note: "جبل الرصاص، صخر فاتح وهواء حر وأفق لا ينتهي."
     }
   }
 };

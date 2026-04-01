@@ -13,7 +13,6 @@ import "@fontsource/tajawal/latin-400.css";
 import "@fontsource/tajawal/latin-500.css";
 import "@fontsource/tajawal/latin-700.css";
 import "@fontsource/tajawal/latin-800.css";
-import "leaflet/dist/leaflet.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";

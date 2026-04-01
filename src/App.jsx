@@ -1,103 +1,28 @@
 import { startTransition, useEffect, useMemo, useRef, useState } from "react";
-import { AIChat } from "./components/AIChat";
 import { Gallery } from "./components/Gallery";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { MapPanel } from "./components/MapPanel";
+import { MountainExplore } from "./components/MountainExplore";
 import { SectionHeading } from "./components/SectionHeading";
-import { ThreeScene } from "./components/ThreeScene";
+import { VisitGuide } from "./components/VisitGuide";
 import { content } from "./content";
-import { generateProjectReport } from "./lib/PDFGenerator";
-import { buildMediaPlan, localAssets } from "./lib/localAssets";
-
-const galleryNarratives = {
-  fr: {
-    image: [
-      {
-        title: "Panorama local du massif",
-        text: "Une lecture ample de Jebel Ressas, utile pour installer le site et la profondeur du paysage."
-      },
-      {
-        title: "Face rocheuse et vegetation",
-        text: "Un cadrage qui met en tension la matiere minerale et le tapis vegetal au premier plan."
-      },
-      {
-        title: "Sommet et repere visuel",
-        text: "Une image liee a l'arrivee, a l'altitude et a la sensation de point haut."
-      },
-      {
-        title: "Crete et lumiere nocturne",
-        text: "Une ambiance plus dramatique qui rappelle la force du relief dans un contexte urbain lointain."
-      }
-    ],
-    video: {
-      title: "Sequence video locale",
-      text: "La video est utilisee comme fond hero et comme media immersif dans la galerie."
-    }
-  },
-  ar: {
-    image: [
-      {
-        title: "بانوراما محلية للجبل",
-        text: "لقطة واسعة تثبّت حضور جبل الرصاص وعمق المشهد المحيط به."
-      },
-      {
-        title: "واجهة صخرية ونباتات",
-        text: "إطار يبرز العلاقة بين المادة الصخرية والغطاء النباتي في المقدمة."
-      },
-      {
-        title: "القمة والعلامة البصرية",
-        text: "صورة مرتبطة بالوصول والارتفاع وإحساس النقطة العليا."
-      },
-      {
-        title: "الحافة والضوء الليلي",
-        text: "جو أكثر درامية يبيّن قوة التضاريس مع حضور المدينة في البعيد."
-      }
-    ],
-    video: {
-      title: "مقطع فيديو محلي",
-      text: "الفيديو يُستخدم كخلفية للبطل وكوسيط غامر داخل المعرض."
-    }
-  }
-};
+import { buildMediaPlan } from "./lib/localAssets";
 
 function App() {
   const [lang, setLang] = useState("fr");
   const [isSwitching, setIsSwitching] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
-  const [guideOpenRequest, setGuideOpenRequest] = useState(0);
   const appRef = useRef(null);
   const t = useMemo(() => content[lang], [lang]);
   const mediaPlan = useMemo(() => buildMediaPlan(), []);
 
   const galleryItems = useMemo(() => {
-    const narrative = galleryNarratives[lang];
+    const captions = t.gallery.captions;
 
-    return mediaPlan.galleryMedia.map((asset, index) => {
-      const copyBlock =
-        asset.type === "video"
-          ? narrative.video
-          : narrative.image[index % Math.max(1, narrative.image.length)];
-
-      return {
-        ...asset,
-        title: copyBlock.title,
-        text: copyBlock.text
-      };
-    });
-  }, [lang, mediaPlan.galleryMedia]);
-
-  const heroStats = useMemo(
-    () => [
-      t.hero.stats[0],
-      t.hero.stats[1],
-      {
-        label: t.hero.stats[2].label,
-        value: `${localAssets.images.length} img / ${localAssets.videos.length} vid`
-      }
-    ],
-    [t.hero.stats]
-  );
+    return mediaPlan.galleryImages.map((asset, index) => ({
+      ...asset,
+      alt: captions[index % Math.max(1, captions.length)]
+    }));
+  }, [mediaPlan.galleryImages, t.gallery.captions]);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -204,41 +129,6 @@ function App() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const downloadReport = async () => {
-    if (isGeneratingReport) {
-      return;
-    }
-
-    setIsGeneratingReport(true);
-
-    try {
-      await generateProjectReport({ assets: mediaPlan.all, language: lang });
-    } finally {
-      setIsGeneratingReport(false);
-    }
-  };
-
-  const handleGuideAction = (action) => {
-    if (action === "report") {
-      downloadReport();
-      return;
-    }
-
-    if (action === "map") {
-      scrollToSection("map");
-      return;
-    }
-
-    if (action === "gallery") {
-      scrollToSection("gallery");
-      return;
-    }
-
-    if (action === "three") {
-      scrollToSection("three-d");
-    }
-  };
-
   return (
     <div
       className={`app ${t.direction === "rtl" ? "is-rtl" : ""} ${isSwitching ? "is-switching" : ""}`}
@@ -264,16 +154,6 @@ function App() {
         </nav>
 
         <div className="topbar__actions">
-          <button
-            className="button button--ghost button--compact"
-            type="button"
-            onClick={() => setGuideOpenRequest((current) => current + 1)}
-          >
-            {t.navigation.guideButton}
-          </button>
-          <button className="button button--ghost button--compact" type="button" onClick={downloadReport}>
-            {isGeneratingReport ? t.report.generating : t.navigation.reportButton}
-          </button>
           <LanguageSwitcher lang={t.languageLabel} label={t.switchLabel} onToggle={toggleLanguage} />
         </div>
       </header>
@@ -285,15 +165,15 @@ function App() {
               <video
                 className="hero__video"
                 src={mediaPlan.heroVideo.src}
-                poster={mediaPlan.heroPoster?.src}
+                poster={mediaPlan.heroImage?.src}
                 autoPlay
                 muted
                 loop
                 playsInline
                 preload="metadata"
               />
-            ) : mediaPlan.heroPoster ? (
-              <img className="hero__image" src={mediaPlan.heroPoster.src} alt="" />
+            ) : mediaPlan.heroImage ? (
+              <img className="hero__image" src={mediaPlan.heroImage.src} alt="" />
             ) : (
               <div className="hero__empty" />
             )}
@@ -308,14 +188,11 @@ function App() {
               <p className="hero__description">{t.hero.description}</p>
 
               <div className="hero__actions">
-                <button className="button button--primary" type="button" onClick={() => scrollToSection("map")}>
+                <button className="button button--primary" type="button" onClick={() => scrollToSection("story")}>
                   {t.hero.primaryAction}
                 </button>
-                <button className="button button--ghost" type="button" onClick={() => scrollToSection("three-d")}>
+                <button className="button button--ghost" type="button" onClick={() => scrollToSection("relief")}>
                   {t.hero.secondaryAction}
-                </button>
-                <button className="button button--ghost" type="button" onClick={downloadReport}>
-                  {isGeneratingReport ? t.report.generating : t.hero.tertiaryAction}
                 </button>
               </div>
 
@@ -327,15 +204,15 @@ function App() {
 
             <aside className="hero__aside glass-panel">
               <div className="hero__aside-media">
-                {mediaPlan.heroPoster ? (
-                  <img src={mediaPlan.heroPoster.src} alt="Jebel Ressas preview" />
+                {mediaPlan.heroImage ? (
+                  <img src={mediaPlan.heroImage.src} alt={t.hero.previewAlt} />
                 ) : (
                   <div className="media-fallback">{t.common.emptyMedia}</div>
                 )}
               </div>
 
               <div className="hero__stats">
-                {heroStats.map((item) => (
+                {t.hero.stats.map((item) => (
                   <article className="stat-card" key={item.label}>
                     <strong>{item.value}</strong>
                     <span>{item.label}</span>
@@ -346,31 +223,31 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell" id="overview">
-          <SectionHeading kicker={t.overview.kicker} title={t.overview.title} text={t.overview.text} />
+        <section className="section-shell" id="story">
+          <SectionHeading kicker={t.story.kicker} title={t.story.title} text={t.story.text} />
 
-          <div className="overview-layout">
+          <div className="story-layout">
             <figure className="media-panel glass-panel" data-reveal>
-              {mediaPlan.overviewImage ? (
-                <img src={mediaPlan.overviewImage.src} alt="Jebel Ressas local media" loading="lazy" />
+              {mediaPlan.storyImage ? (
+                <img src={mediaPlan.storyImage.src} alt={t.story.imageAlt} loading="lazy" />
               ) : (
                 <div className="media-fallback">{t.common.emptyMedia}</div>
               )}
             </figure>
 
-            <div className="insight-grid">
-              {t.overview.highlights.map((item) => (
-                <article className="insight-card glass-panel" key={item.title} data-reveal>
-                  <span className="insight-card__eyebrow">{item.eyebrow}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
+            <div className="story-grid">
+              {t.story.moments.map((moment) => (
+                <article className="insight-card glass-panel" key={moment.title} data-reveal>
+                  <span className="insight-card__eyebrow">{moment.eyebrow}</span>
+                  <h3>{moment.title}</h3>
+                  <p>{moment.text}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section-shell" id="experiences">
+        <section className="section-shell" id="experience">
           <SectionHeading
             kicker={t.experiences.kicker}
             title={t.experiences.title}
@@ -379,7 +256,7 @@ function App() {
 
           <div className="experience-grid">
             {t.experiences.items.map((item, index) => {
-              const media = mediaPlan.experienceMedia[index] ?? mediaPlan.heroPoster;
+              const media = mediaPlan.experienceImages[index] ?? mediaPlan.heroImage;
 
               return (
                 <article className="experience-card glass-panel" key={item.title} data-reveal>
@@ -401,85 +278,38 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell" id="map">
-          <SectionHeading kicker={t.map.kicker} title={t.map.title} text={t.map.text} />
-
-          <div className="feature-layout">
-            <MapPanel copy={t.map} direction={t.direction} />
-
-            <div className="detail-stack">
-              {mediaPlan.backgroundImage ? (
-                <article className="detail-media-card glass-panel" data-reveal>
-                  <img src={mediaPlan.backgroundImage.src} alt="Jebel Ressas view" loading="lazy" />
-                </article>
-              ) : null}
-
-              {t.map.cards.map((card) => (
-                <article className="detail-card glass-panel" key={card.title} data-reveal>
-                  <span className="detail-card__number">{card.number}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+        <section className="section-shell" id="relief">
+          <SectionHeading kicker={t.relief.kicker} title={t.relief.title} text={t.relief.text} />
+          <MountainExplore copy={t.relief} />
         </section>
 
-        <section className="section-shell" id="three-d">
-          <SectionHeading kicker={t.three.kicker} title={t.three.title} text={t.three.text} />
+        <section className="section-shell" id="panorama">
+          <SectionHeading kicker={t.panorama.kicker} title={t.panorama.title} text={t.panorama.text} />
 
-          <div className="feature-layout">
-            <ThreeScene copy={t.three} />
+          <div className="panorama-layout">
+            <figure className="panorama-image glass-panel" data-reveal>
+              {mediaPlan.panoramaImage ? (
+                <img src={mediaPlan.panoramaImage.src} alt={t.panorama.imageAlt} loading="lazy" />
+              ) : (
+                <div className="media-fallback">{t.common.emptyMedia}</div>
+              )}
+            </figure>
 
-            <div className="detail-stack">
-              {mediaPlan.reportImage ? (
-                <article className="detail-media-card glass-panel" data-reveal>
-                  <img src={mediaPlan.reportImage.src} alt="Jebel Ressas summit view" loading="lazy" />
-                </article>
-              ) : null}
+            <div className="panorama-stack">
+              <article className="quote-card glass-panel" data-reveal>
+                <span className="insight-card__eyebrow">{t.panorama.panelLabel}</span>
+                <h3>{t.panorama.panelTitle}</h3>
+                <p>{t.panorama.panelText}</p>
+              </article>
 
-              {t.three.facts.map((fact) => (
-                <article className="detail-card glass-panel" key={fact.title} data-reveal>
-                  <span className="detail-card__number">{fact.number}</span>
-                  <h3>{fact.title}</h3>
-                  <p>{fact.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section-shell" id="guide">
-          <SectionHeading kicker={t.guide.kicker} title={t.guide.title} text={t.guide.text} />
-
-          <div className="guide-layout">
-            <div className="detail-stack">
-              {t.guide.features.map((feature) => (
-                <article className="detail-card glass-panel" key={feature.title} data-reveal>
-                  <span className="insight-card__eyebrow">{feature.eyebrow}</span>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.text}</p>
+              {t.panorama.details.map((detail) => (
+                <article className="detail-card glass-panel" key={detail.title} data-reveal>
+                  <span className="detail-card__number">{detail.number}</span>
+                  <h3>{detail.title}</h3>
+                  <p>{detail.text}</p>
                 </article>
               ))}
             </div>
-
-            <aside className="guide-panel glass-panel" data-reveal>
-              <div className="guide-panel__media">
-                {mediaPlan.guideImage ? (
-                  <img src={mediaPlan.guideImage.src} alt="Guide visual" loading="lazy" />
-                ) : (
-                  <div className="media-fallback">{t.common.emptyMedia}</div>
-                )}
-              </div>
-
-              <button
-                className="button button--primary"
-                type="button"
-                onClick={() => setGuideOpenRequest((current) => current + 1)}
-              >
-                {t.guide.openButton}
-              </button>
-            </aside>
           </div>
         </section>
 
@@ -488,33 +318,53 @@ function App() {
           <Gallery copy={t.gallery} items={galleryItems} />
         </section>
 
-        <section className="section-shell" id="report">
-          <SectionHeading kicker={t.report.kicker} title={t.report.title} text={t.report.text} />
+        <section className="section-shell" id="emotion">
+          <SectionHeading kicker={t.emotion.kicker} title={t.emotion.title} text={t.emotion.text} />
 
-          <div className="report-shell glass-panel" data-reveal>
-            <div className="report-shell__copy">
-              <div className="report-shell__bullets">
-                {t.report.bullets.map((bullet) => (
-                  <span key={bullet}>{bullet}</span>
-                ))}
-              </div>
-
-              <div className="hero__actions">
-                <button className="button button--primary" type="button" onClick={downloadReport}>
-                  {isGeneratingReport ? t.report.generating : t.report.button}
-                </button>
-                <button className="button button--ghost" type="button" onClick={() => scrollToSection("top")}>
-                  {t.common.backToTop}
-                </button>
-              </div>
+          <div className="emotion-layout">
+            <div className="quote-grid">
+              {t.emotion.quotes.map((quote) => (
+                <article className="quote-card glass-panel" key={quote.text} data-reveal>
+                  <p className="quote-card__text">"{quote.text}"</p>
+                  <span className="quote-card__context">{quote.context}</span>
+                </article>
+              ))}
             </div>
 
-            <div className="report-shell__media">
-              {mediaPlan.reportImage ? (
-                <img src={mediaPlan.reportImage.src} alt="Jebel Ressas report visual" loading="lazy" />
+            <figure className="emotion-media glass-panel" data-reveal>
+              {mediaPlan.emotionImage ? (
+                <img src={mediaPlan.emotionImage.src} alt={t.emotion.imageAlt} loading="lazy" />
               ) : (
                 <div className="media-fallback">{t.common.emptyMedia}</div>
               )}
+            </figure>
+          </div>
+        </section>
+
+        <section className="section-shell" id="visit">
+          <div className="cta-shell glass-panel" data-reveal>
+            <div className="cta-shell__media" aria-hidden="true">
+              {mediaPlan.panoramaImage ? (
+                <img src={mediaPlan.panoramaImage.src} alt="" loading="lazy" />
+              ) : (
+                <div className="hero__empty" />
+              )}
+              <div className="cta-shell__overlay" />
+            </div>
+
+            <div className="cta-shell__copy">
+              <span className="section-heading__kicker">{t.cta.kicker}</span>
+              <h2>{t.cta.title}</h2>
+              <p>{t.cta.text}</p>
+
+              <div className="hero__actions">
+                <button className="button button--primary" type="button" onClick={() => scrollToSection("top")}>
+                  {t.cta.primaryAction}
+                </button>
+                <button className="button button--ghost" type="button" onClick={() => scrollToSection("gallery")}>
+                  {t.cta.secondaryAction}
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -524,12 +374,7 @@ function App() {
         <p>{t.footer.note}</p>
       </footer>
 
-      <AIChat
-        copy={t.assistant}
-        lang={lang}
-        onAction={handleGuideAction}
-        openRequest={guideOpenRequest}
-      />
+      <VisitGuide copy={t.guide} lang={lang} onAction={scrollToSection} />
     </div>
   );
 }
