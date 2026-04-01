@@ -241,9 +241,10 @@ export const content = {
         visit: "Preparer la venue"
       }
     },
-    footer: {
-      note: "Jebel Ressas, entre pierre claire, vent libre et horizon."
-    }
+footer: {
+  note: "Tous droits réservés à Iheb El Ech",
+  link: "https://www.linkedin.com/in/iheb-el-ech/"
+}
   },
   ar: {
     direction: "rtl",
@@ -477,8 +478,9 @@ export const content = {
         visit: "استعد للقدوم"
       }
     },
-    footer: {
-      note: "جبل الرصاص، صخر فاتح وهواء حر وأفق لا ينتهي."
-    }
+footer: {
+  note: "جميع الحقوق محفوظة لدى إيهاب العش – Iheb El Ech",
+  link: "https://www.linkedin.com/in/iheb-el-ech/"
+}
   }
 };

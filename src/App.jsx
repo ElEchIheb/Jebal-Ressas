@@ -394,7 +394,12 @@ function App() {
       </main>
 
       <footer className="footer section-shell">
-        <p>{t.footer.note}</p>
+<p>
+  {t.footer.note}{" "}
+  <a href={t.footer.link} target="_blank" rel="noreferrer">
+    Lien LinkedIn
+  </a>
+</p>
       </footer>
 
       <VisitGuide copy={t.guide} lang={lang} onAction={scrollToSection} />
